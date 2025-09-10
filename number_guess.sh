@@ -1,3 +1,4 @@
+cat > number_guess.sh <<'EOF'
 #!/bin/bash
 # number_guess.sh — freeCodeCamp Number Guessing Game
 
@@ -11,8 +12,8 @@ read USERNAME
 USER_ID="$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME';")"
 
 if [[ -z $USER_ID ]]; then
-  # user baru
-  $PSQL "INSERT INTO users(username) VALUES('$USERNAME');" >/dev/null
+  # user baru (diamkan stdout+stderr agar output bersih)
+  $PSQL "INSERT INTO users(username) VALUES('$USERNAME');" >/dev/null 2>&1
   USER_ID="$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME';")"
   echo "Welcome, $USERNAME! It looks like this is your first time here."
 else
@@ -42,8 +43,10 @@ do
   GUESSES=$(( GUESSES + 1 ))
 
   if (( GUESS == SECRET_NUMBER )); then
+    # >>> Baris ini HARUS persis seperti ini <<<
     echo "You guessed it in $GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
-    $PSQL "INSERT INTO games(user_id, guesses, secret_number) VALUES($USER_ID, $GUESSES, $SECRET_NUMBER);" >/dev/null
+    # simpan game (diamkan stdout+stderr)
+    $PSQL "INSERT INTO games(user_id, guesses, secret_number) VALUES($USER_ID, $GUESSES, $SECRET_NUMBER);" >/dev/null 2>&1
     break
   elif (( GUESS > SECRET_NUMBER )); then
     echo "It's lower than that, guess again:"
