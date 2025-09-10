@@ -1,4 +1,3 @@
-cat > number_guess.sh <<'EOF'
 #!/bin/bash
 # number_guess.sh — freeCodeCamp Number Guessing Game
 
@@ -53,6 +52,3 @@ do
     echo "It's higher than that, guess again:"
   fi
 done
-EOF
-
-chmod +x number_guess.sh
