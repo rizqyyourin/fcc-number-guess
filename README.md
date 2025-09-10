@@ -1,6 +1,7 @@
 # Number Guessing Game
 
 freeCodeCamp RDB project.
+<<<<<<< HEAD
 
 ## DB
 - DB: number_guess
@@ -8,3 +9,5 @@ freeCodeCamp RDB project.
 
 ## How to play
 ./number_guess.sh
+=======
+>>>>>>> Initial commit
