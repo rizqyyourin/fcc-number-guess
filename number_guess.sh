@@ -43,7 +43,6 @@ do
   GUESSES=$(( GUESSES + 1 ))
 
   if (( GUESS == SECRET_NUMBER )); then
-    # >>> Baris ini HARUS persis seperti ini <<<
     echo "You guessed it in $GUESSES tries. The secret number was $SECRET_NUMBER. Nice job!"
     # simpan game (diamkan stdout+stderr)
     $PSQL "INSERT INTO games(user_id, guesses, secret_number) VALUES($USER_ID, $GUESSES, $SECRET_NUMBER);" >/dev/null 2>&1
@@ -54,3 +53,6 @@ do
     echo "It's higher than that, guess again:"
   fi
 done
+EOF
+
+chmod +x number_guess.sh
